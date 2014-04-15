@@ -57,6 +57,7 @@ CONFIG_KERNEL_KALLSYMS=y
 CONFIG_KERNEL_DEBUG_KERNEL=y
 CONFIG_KERNEL_DEBUG_INFO=y
 CONFIG_ATH_USER_REGD=y
+CONFIG_VERSION_REPO="http://rund.freifunk.net:8006/firmware/buildroots/ar71xx_generic_2014/packages"
 EOF
 
 make defconfig
