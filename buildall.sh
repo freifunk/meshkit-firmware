@@ -61,6 +61,7 @@ CONFIG_ATH_USER_REGD=y
 CONFIG_PACKAGE_ATH_DEBUG=y
 CONFIG_VERSIONOPT=y
 CONFIG_VERSION_REPO="http://rund.freifunk.net:8006/firmware/buildroots/ar71xx_generic_2014/packages"
+CONFIG_PACKAGE_collectd-mod-netlink=n
 EOF
 
 make defconfig
