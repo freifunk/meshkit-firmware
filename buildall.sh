@@ -20,6 +20,7 @@ cp feeds.conf.default feeds.conf
 echo "src-git luci2 http://git.openwrt.org/project/luci2/ui.git" >> feeds.conf
 echo "src-git cjdns git://github.com/lgierth/cjdns-openwrt.git" >> feeds.conf
 echo "src-git lff git://git.metameute.de/lff/pkg_fastd" >> feeds.conf
+echo "src-git mwan3 git://github.com/Adze1502/mwan.git" >> feeds.conf
 scripts/feeds update -a
 
 # revert to batman-adv 2013.4.0
