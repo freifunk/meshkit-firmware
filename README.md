@@ -1,4 +1,5 @@
 freifunk4meshkit
 ================
 
-Freifunk Imagebuilder for Usage with Meshkit 
+Openwrt Imagebuilder for Usage with Meshkit for Freifunk
+
