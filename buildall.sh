@@ -19,7 +19,7 @@ rm -rf feeds/routing*
 cp feeds.conf.default feeds.conf
 echo "src-git luci2 http://git.openwrt.org/project/luci2/ui.git" >> feeds.conf
 echo "src-git cjdns git://github.com/lgierth/cjdns-openwrt.git" >> feeds.conf
-echo "src-git lff git://git.metameute.de/lff/pkg_fastd" >> feeds.conf
+echo "src-git fastd git://git.metameute.de/lff/pkg_fastd" >> feeds.conf
 echo "src-git mwan3 git://github.com/Adze1502/mwan.git" >> feeds.conf
 echo "src-git wbm git://github.com/battlemesh/battlemesh-packages.git" >> feeds.conf
 scripts/feeds update -a
@@ -62,7 +62,7 @@ CONFIG_PACKAGE_kmod-ath=y
 CONFIG_ATH_USER_REGD=y
 CONFIG_PACKAGE_ATH_DEBUG=y
 CONFIG_VERSIONOPT=y
-CONFIG_VERSION_REPO="http://rund.freifunk.net:8006/firmware/buildroots/ar71xx_generic_2014/packages"
+CONFIG_VERSION_REPO="http://rund.freifunk.net:8006/firmware/buildroots/ar71xx_generic_20140424/packages"
 CONFIG_PACKAGE_collectd-mod-netlink=n
 EOF
 
