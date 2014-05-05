@@ -23,6 +23,7 @@ echo "src-git fastd git://git.metameute.de/lff/pkg_fastd" >> feeds.conf
 echo "src-git mwan3 git://github.com/Adze1502/mwan.git" >> feeds.conf
 echo "src-git batmanadv http://git.open-mesh.org/openwrt-feed-batman-adv.git" >> feeds.conf
 echo "src-git wbm git://github.com/battlemesh/battlemesh-packages.git" >> feeds.conf
+echo "src-git libreage git://github.com/libremap/libremap-agent-openwrt.git" >> feeds.conf
 scripts/feeds update -a
 
 # revert to batman-adv 2013.4.0
