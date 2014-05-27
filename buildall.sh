@@ -26,6 +26,7 @@ echo "src-git wbm git://github.com/battlemesh/battlemesh-packages.git" >> feeds.
 echo "src-git libreage git://github.com/libremap/libremap-agent-openwrt.git" >> feeds.conf
 echo "src-git kadnode git://github.com/mwarning/KadNode.git" >> feeds.conf
 echo "src-git kadlibsodium git://github.com/mwarning/libsodium-openwrt.git" >> feeds.conf
+echo "src-git fswebcam git://github.com/fsphil/fswebcam.git" >> feeds.conf
 
 scripts/feeds update -a
 
