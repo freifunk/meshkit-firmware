@@ -24,6 +24,9 @@ echo "src-git mwan3 git://github.com/Adze1502/mwan.git" >> feeds.conf
 echo "src-git batmanadv http://git.open-mesh.org/openwrt-feed-batman-adv.git" >> feeds.conf
 echo "src-git wbm git://github.com/battlemesh/battlemesh-packages.git" >> feeds.conf
 echo "src-git libreage git://github.com/libremap/libremap-agent-openwrt.git" >> feeds.conf
+echo "src-git kadnode git://github.com/mwarning/KadNode.git" >> feeds.conf
+echo "src-git kadlibsodium git://github.com/mwarning/libsodium-openwrt.git" >> feeds.conf
+
 scripts/feeds update -a
 
 # revert to batman-adv 2013.4.0
