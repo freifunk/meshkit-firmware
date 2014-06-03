@@ -18,7 +18,8 @@ cd openwrt
 rm -rf feeds/routing*
 cp feeds.conf.default feeds.conf
 echo "src-git luci2 http://git.openwrt.org/project/luci2/ui.git" >> feeds.conf
-echo "src-git cjdns git://github.com/lgierth/cjdns-openwrt.git" >> feeds.conf
+#echo "src-git cjdns git://github.com/lgierth/cjdns-openwrt.git" >> feeds.conf
+echo "src-git cjdns git://github.com/seattlemeshnet/meshbox.git" >> feeds.conf
 echo "src-git fastd git://git.metameute.de/lff/pkg_fastd" >> feeds.conf
 echo "src-git mwan3 git://github.com/Adze1502/mwan.git" >> feeds.conf
 echo "src-git batmanadv http://git.open-mesh.org/openwrt-feed-batman-adv.git" >> feeds.conf
