@@ -78,7 +78,7 @@ CONFIG_VERSIONOPT=y
 CONFIG_VERSION_DIST="OpenWrt"
 CONFIG_VERSION_NICK=""
 CONFIG_VERSION_NUMBER=""
-CONFIG_VERSION_REPO="http://rund.freifunk.net:8006/firmware/buildroots/ar71xx_generic_20140611/packages"
+CONFIG_VERSION_REPO="http://rund.freifunk.net:8006/firmware/buildroots/ar71xx_generic_20140624/packages"
 CONFIG_PACKAGE_collectd-mod-netlink=n
 CONFIG_PACKAGE_kmod-pcspkr=n
 EOF
