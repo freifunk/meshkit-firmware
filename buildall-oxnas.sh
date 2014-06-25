@@ -76,7 +76,7 @@ CONFIG_VERSIONOPT=y
 CONFIG_VERSION_DIST="OpenWrt"
 CONFIG_VERSION_NICK=""
 CONFIG_VERSION_NUMBER=""
-CONFIG_VERSION_REPO="http://firmware.leipzig.freifunk.net:8006/firmware/buildroots/oxnas_20140624oxnas/packages"
+CONFIG_VERSION_REPO="http://firmware.leipzig.freifunk.net:8006/firmware/buildroots/oxnas_20140625oxnas/packages"
 CONFIG_PACKAGE_collectd-mod-netlink=n
 CONFIG_PACKAGE_kmod-pcspkr=n
 EOF
