@@ -12,6 +12,19 @@ TARGET=oxnas
 set +e
 
 git clone $REMOTE openwrt-oxnas
+
+# if [ ! -d openwrt-oxnas ]; then
+# git clone $REMOTE openwrt-oxnas
+# else
+# ( cd openwrt-oxnas;
+# git fetch origin;
+# git checkout origin/master;
+# git branch -D master;
+# git checkout -b master; );
+# fi
+
+
+
 cd openwrt-oxnas
 cp feeds.conf.default feeds.conf
 echo "src-git luci2 http://git.openwrt.org/project/luci2/ui.git" >> feeds.conf
