@@ -79,6 +79,8 @@ CONFIG_VERSION_NUMBER=""
 CONFIG_VERSION_REPO="http://firmware.leipzig.freifunk.net:8006/firmware/buildroots/oxnas_20140625oxnas/packages"
 CONFIG_PACKAGE_collectd-mod-netlink=n
 CONFIG_PACKAGE_kmod-pcspkr=n
+CONFIG_SENSORS_VEXPRESS=m
+SENSORS_VEXPRESS=m
 EOF
 
 make defconfig
