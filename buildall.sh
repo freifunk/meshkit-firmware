@@ -87,6 +87,6 @@ make defconfig
 # allow stuff to fail from here on
 set -e
 
-# make everything
-#make $MAKEOPTS IGNORE_ERRORS=m V=99 BUILD_LOG=1
+echo # make everything with
+echo #make $MAKEOPTS IGNORE_ERRORS=m V=99 BUILD_LOG=1
 echo dont forget to set batman-adv devel version git commit number manually if you need that
