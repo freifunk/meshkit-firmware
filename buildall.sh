@@ -15,7 +15,6 @@ set +e
 
 git clone $REMOTE openwrt
 cd openwrt
-rm -rf feeds/routing*
 cp feeds.conf.default feeds.conf
 echo "src-git luci2 http://git.openwrt.org/project/luci2/ui.git" >> feeds.conf
 #echo "src-git cjdns git://github.com/lgierth/cjdns-openwrt.git" >> feeds.conf
