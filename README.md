@@ -13,3 +13,11 @@ http://meshkit.freifunk.net
 
 --
 Freifunk Leipzig
+
+
+Tipps
+=====
+
+für ath9k: freeswitch pakete scheinen noch probleme zu machen, d.h. .config datei ist manuell zu editieren
+
+für x86: manuell datei editieren.. später vor dem Bauen "make menuconfig" und kvm auswählen, sowie startpartition auf /dev/vda... anstelle /dev/sda ändern!
