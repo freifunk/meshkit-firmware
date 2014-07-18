@@ -89,4 +89,4 @@ set -e
 
 echo # make everything with
 echo #make $MAKEOPTS IGNORE_ERRORS=m V=99 BUILD_LOG=1
-echo dont forget to set batman-adv devel version git commit number manually if you need that
+#echo dont forget to set batman-adv devel version git commit number manually if you need that
