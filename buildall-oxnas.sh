@@ -80,7 +80,8 @@ CONFIG_VERSION_REPO="http://firmware.leipzig.freifunk.net:8006/firmware/buildroo
 CONFIG_PACKAGE_collectd-mod-netlink=n
 CONFIG_PACKAGE_kmod-pcspkr=n
 CONFIG_SENSORS_VEXPRESS=m
-SENSORS_VEXPRESS=m
+# CONFIG_TARGET_ROOTFS_INITRAMFS is not set
+# CONFIG_TARGET_INITRAMFS_COMPRESSION_NONE is not set
 EOF
 
 make defconfig
