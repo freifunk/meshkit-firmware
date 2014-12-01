@@ -3,7 +3,7 @@
 #TARGET=ar71xx
 
 # in case of oxnas, also use oxnas remote site
-REMOTE=git://gitorious.org/openwrt-oxnas/openwrt-oxnas.git
+REMOTE=git://git.openwrt.org/openwrt.git
 TARGET=oxnas
 
 # MAKEOPTS="-j4"
@@ -11,7 +11,7 @@ TARGET=oxnas
 # fail on errors
 set +e
 
-git clone $REMOTE openwrt-oxnas
+git clone $REMOTE openwrt
 
 # if [ ! -d openwrt-oxnas ]; then
 # git clone $REMOTE openwrt-oxnas
@@ -25,7 +25,7 @@ git clone $REMOTE openwrt-oxnas
 
 
 
-cd openwrt-oxnas
+cd openwrt
 cp feeds.conf.default feeds.conf
 echo "src-git luci2 http://git.openwrt.org/project/luci2/ui.git" >> feeds.conf
 #echo "src-git cjdns git://github.com/lgierth/cjdns-openwrt.git" >> feeds.conf
