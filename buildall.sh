@@ -27,7 +27,7 @@ echo "src-git libreage git://github.com/libremap/libremap-agent-openwrt.git" >> 
 echo "src-git kadnode git://github.com/mwarning/KadNode.git" >> feeds.conf
 echo "src-git kadlibsodium git://github.com/mwarning/libsodium-openwrt.git" >> feeds.conf
 echo "src-git fswebcam git://github.com/fsphil/fswebcam.git" >> feeds.conf
-echo "src-git solarfestival git://github.com:freifunk/freifunk-leipzig/solarfestival-packages.git" >> feeds.conf
+echo "src-git solarfestival git://github.com/freifunk-leipzig/solarfestival-packages.git" >> feeds.conf
 #echo "src-git oldpackages http://git.openwrt.org/packages.git" >> feeds.conf
 
 scripts/feeds update -a
