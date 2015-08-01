@@ -27,6 +27,9 @@ CORES=8
 # CCache may be enabled here
 USE_CCACHE=1
 
+# Build the SDK
+BUILD_SDK=0
+
 # Enable verbose output for make
 VERBOSE_MAKE=1
 

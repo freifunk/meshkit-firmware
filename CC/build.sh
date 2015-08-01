@@ -109,6 +109,12 @@ fi
 	e "Using CCACHE"
 }
 
+# enable SDK build
+[ "$BUILD_SDK" = 1 ] && {
+        echo "CONFIG_SDK=y" >> .config
+        e "Building the SDK."
+}
+
 make defconfig
 
 # Update openwrt_release
