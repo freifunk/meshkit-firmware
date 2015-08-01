@@ -1,26 +1,14 @@
 Index: feeds.conf.default
 ===================================================================
---- feeds.conf.default	(Revision 46113)
+--- feeds.conf.default	(Revision 46434)
 +++ feeds.conf.default	(Arbeitskopie)
-@@ -1,8 +1,8 @@
- src-git packages https://github.com/openwrt/packages.git;for-15.05
- src-git luci https://github.com/openwrt/luci.git;for-15.05
--src-git routing https://github.com/openwrt-routing/packages.git;for-15.05
- src-git telephony https://github.com/openwrt/telephony.git;for-15.05
- src-git management https://github.com/openwrt-management/packages.git;for-15.05
-+src-git routing https://github.com/mmunz/packages.git
- #src-git targets https://github.com/openwrt/targets.git
- #src-git oldpackages http://git.openwrt.org/packages.git
- #src-svn xwrt http://x-wrt.googlecode.com/svn/trunk/package
-@@ -13,3 +13,13 @@
+@@ -13,3 +13,11 @@
  #src-svn xfce svn://svn.openwrt.org/openwrt/feeds/xfce
  #src-svn lxde svn://svn.openwrt.org/openwrt/feeds/lxde
  #src-link custom /usr/src/openwrt/custom-feed
 +src-svn augsburg https://svn.augsburg.freifunk.net/openwrt/packages/
 +src-git luci2 http://git.openwrt.org/project/luci2/ui.git
-+src-git cjdns git://github.com/seattlemeshnet/meshbox.git
 +src-git fastd git://git.metameute.de/lff/pkg_fastd
-+src-git batmanadv http://git.open-mesh.org/openwrt-feed-batman-adv.git
 +src-git wbm git://github.com/battlemesh/battlemesh-packages.git
 +src-git libreage git://github.com/libremap/libremap-agent-openwrt.git
 +src-git kadnode git://github.com/mwarning/KadNode.git
