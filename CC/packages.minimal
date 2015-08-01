@@ -10,6 +10,7 @@ dnsmasq
 dnsmasq-dhcpv6
 freifunk-common
 freifunk-policyrouting
+hostapd-mini
 iftop
 ip6tables
 iputils-traceroute6
@@ -20,6 +21,7 @@ luci-app-freifunk-policyrouting
 luci-app-freifunk-widgets
 luci-app-statistics
 luci-app-tinc-augsburg
+luci-app-meshwizard
 luci-i18n-base-de
 luci-i18n-firewall-de
 luci-i18n-freifunk-de
@@ -31,6 +33,7 @@ luci-mod-admin-full
 luci-mod-freifunk
 luci-mod-freifunk-community
 luci-theme-freifunk-generic
+meshwizard
 nano
 olsrd
 olsrd-mod-arprefresh
