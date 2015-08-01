@@ -95,10 +95,10 @@ if [ "$BUILD_ALL" = 1 ]; then
 else
 	if [ -f $SCRIPTDIR/packages.minimal ]; then
 		e "Building minimal package set"
-		PACKAGES_MINIMAL="$(cat $SCRIPTDIR/packages.minimal)"
-		for p in $PACKAGES_MINIMAL; do
-			echo "CONFIG_PACKAGE_${p}=m" >> .config
-		done
+		while read line; do
+			echo "CONFIG_PACKAGE_${line}=m" >> .config
+			e "Adding:  $line"
+		done < $SCRIPTDIR/packages.minimal
 	fi
 fi
 
