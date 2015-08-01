@@ -1,23 +1,41 @@
-Openwrt for Freifunk Meshkit
-============================
+Buildscripts for Meshkit Firmware
+=================================
 
-This is a Openwrt Build Script for Usage with Meshkit Imagebuilder for Freifunk. Its based on openwrt trunk, all packages will be built so opkg can postinstall more packages if anybody wants.
+These scripts build the Meshkit firmware, which is basically the openwrt
+imagebuilder plus a few necessary patches and some extra feeds.
 
-Please be careful using this, its trunk, sometimes with crazy problems. Freifunk Leipzig will sometimes build that, this Meshkit with newest trunk openwrt can be used at
+For configuration see config.sh and the comments there.
 
-http://firmware.leipzig.freifunk.net:8086/meshkit/
+Prepare
+-------
 
-If you need an outdated Firmware, but with Openwrt Attitude Adjustment please have a look at
+To start with a fresh build, prepare the buildroot first (checkout sources etc):
 
-http://meshkit.freifunk.net
+$ sh ~/buildscripts/CC/prepare.sh -s svn://svn.openwrt.org/openwrt/branches/chaos_calmer -d chaos_calmer
 
---
-Freifunk Leipzig
+This should checkout openwrt from svn. Yes, svn. We need that to get clean
+version numbers for the builds.
+
+Build imagebuilder
+------------------
+
+Then change to the destination directory, e.g.
+
+$ cd chaos_calmer
+
+After that, start a build:
+
+$ sh ~/buildscripts/CC/build.sh -t ar71xx
 
 
-Tipps
-=====
 
-für ath9k: freeswitch pakete scheinen noch probleme zu machen, d.h. .config datei ist manuell zu editieren
 
-für x86: manuell datei editieren.. später vor dem Bauen "make menuconfig" und kvm auswählen, sowie startpartition auf /dev/vda... anstelle /dev/sda ändern!
+
+
+
+
+
+
+
+
+
