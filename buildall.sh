@@ -2,15 +2,7 @@
 REMOTE=git://git.openwrt.org/openwrt.git
 TARGET=ar71xx
 #TARGET=x86
-# TARGET=ramips
 
-# in case of oxnas, also use oxnas remote site
-# REMOTE=git://gitorious.org/openwrt-oxnas/openwrt-oxnas.git
-# TARGET=oxnas
-
-# MAKEOPTS="-j4"
-
-# fail on errors
 set +e
 
 git clone $REMOTE openwrt
@@ -43,6 +35,7 @@ CONFIG_TARGET_ROOTFS_SQUASHFS=y
 # CONFIG_TARGET_ROOTFS_INCLUDE_UIMAGE is not set
 # CONFIG_TARGET_ROOTFS_INCLUDE_ZIMAGE is not set
 CONFIG_ALL=y
+CONFIG_ALL_KMODS=y
 CONFIG_IMAGEOPT=y
 CONFIG_DEVEL=y
 CONFIG_NEED_TOOLCHAIN=y
@@ -61,7 +54,7 @@ CONFIG_VERSIONOPT=y
 CONFIG_VERSION_DIST="OpenWrt"
 CONFIG_VERSION_NICK=""
 CONFIG_VERSION_NUMBER=""
-CONFIG_VERSION_REPO="http://firmware.leipzig.freifunk.net:8006/firmware/buildroots/ar71xx_generic_20150609/packages"
+CONFIG_VERSION_REPO="http://firmware.leipzig.freifunk.net:8006/firmware/buildroots/ar71xx_generic_20151201/packages"
 CONFIG_PACKAGE_collectd-mod-netlink=n
 CONFIG_PACKAGE_kmod-pcspkr=n
 EOF
@@ -74,6 +67,6 @@ set -e
 echo # make everything with
 echo #make $MAKEOPTS IGNORE_ERRORS=m V=99 BUILD_LOG=1
 echo #please do it within screen###
-echo make IGNORE_ERRORS=m V=99
+echo make IGNORE_ERRORS=m 
 
-#echo dont forget to set batman-adv devel version git commit number manually if you need that
+
