@@ -60,6 +60,7 @@ CONFIG_TARGET_ROOTFS_SQUASHFS=y
 # CONFIG_TARGET_ROOTFS_INCLUDE_UIMAGE is not set
 # CONFIG_TARGET_ROOTFS_INCLUDE_ZIMAGE is not set
 CONFIG_ALL=y
+CONFIG_ALL_KMODS=y
 CONFIG_IMAGEOPT=y
 CONFIG_DEVEL=y
 CONFIG_NEED_TOOLCHAIN=y
@@ -79,7 +80,7 @@ CONFIG_VERSIONOPT=y
 CONFIG_VERSION_DIST="OpenWrt"
 CONFIG_VERSION_NICK=""
 CONFIG_VERSION_NUMBER=""
-CONFIG_VERSION_REPO="http://firmware.leipzig.freifunk.net:8006/firmware/buildroots/ar71xx_generic_20151120cc/packages"
+CONFIG_VERSION_REPO="http://firmware.leipzig.freifunk.net:8006/firmware/buildroots/ar71xx_generic_20151127cc/packages"
 CONFIG_PACKAGE_collectd-mod-netlink=n
 CONFIG_PACKAGE_kmod-pcspkr=n
 EOF
