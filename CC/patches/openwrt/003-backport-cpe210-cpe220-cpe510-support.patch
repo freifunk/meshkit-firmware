@@ -1,0 +1,18 @@
+Index: tools/firmware-utils/src/tplink-safeloader.c
+===================================================================
+--- tools/firmware-utils/src/tplink-safeloader.c	(Revision 48017)
++++ tools/firmware-utils/src/tplink-safeloader.c	(Arbeitskopie)
+@@ -137,9 +137,13 @@
+ 	"\x00\x00\x00\xc8\x00\x00\x00\x00"
+ 	"SupportList:\r\n"
+ 	"CPE510(TP-LINK|UN|N300-5):1.0\r\n"
++	"CPE510(TP-LINK|UN|N300-5):1.1\r\n"
+ 	"CPE520(TP-LINK|UN|N300-5):1.0\r\n"
++	"CPE520(TP-LINK|UN|N300-5):1.1\r\n"
+ 	"CPE210(TP-LINK|UN|N300-2):1.0\r\n"
++	"CPE210(TP-LINK|UN|N300-2):1.1\r\n"
+ 	"CPE220(TP-LINK|UN|N300-2):1.0\r\n"
++	"CPE220(TP-LINK|UN|N300-2):1.1\r\n"
+ 	"\r\n\xff";
+ 
+ #define error(_ret, _errno, _str, ...)				\
