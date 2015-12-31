@@ -6,7 +6,7 @@ Index: feeds.conf.default
  #src-svn xfce svn://svn.openwrt.org/openwrt/feeds/xfce
  #src-svn lxde svn://svn.openwrt.org/openwrt/feeds/lxde
  #src-link custom /usr/src/openwrt/custom-feed
-+src-svn augsburg https://github.com/freifunk-augsburg/openwrt-packages.git
++src-git augsburg https://github.com/freifunk-augsburg/openwrt-packages.git
 +src-git luci2 http://git.openwrt.org/project/luci2/ui.git
 +src-git fastd git://git.metameute.de/lff/pkg_fastd
 +src-git wbm git://github.com/battlemesh/battlemesh-packages.git
