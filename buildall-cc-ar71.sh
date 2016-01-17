@@ -27,20 +27,20 @@ echo "src-git solarfestival git://github.com/freifunk-leipzig/solarfestival-pack
 scripts/feeds update -a
 
 
-revert to batman-adv 2013.4.0
+revert to batman-adv 2015.2.0
 cd feeds/routing
 git remote add github-routing git://github.com/openwrt-routing/packages.git
 git fetch github-routing
 git checkout -b batman-adv-backport
 rm -r batman-adv
-git checkout 89c2a8bb562412281d1ff070007be16d5a4d8f55 batman-adv
-git commit -a -m "batman-adv: revert to 2013.4.0"
+git checkout 0db26614ecdc60dfed4403374bc9e95586dd3d17 batman-adv
+git commit -a -m "batman-adv: revert to 2015.2.0"
 rm -r alfred
-git checkout e2cfab7f287673b1d6854c59db6e710668d145f3 alfred
-git commit -a -m "alread: revert to 2013.4.0"
+git checkout e25839ae48cfdb44015be5f47d409182cea8c7d2 alfred
+git commit -a -m "alread: revert to 2015.2.0"
 rm -r batctl
-git checkout e2cfab7f287673b1d6854c59db6e710668d145f3 batctl
-git commit -a -m "batctl: revert to 2013.4.0"
+git checkout f8380b4136b2b030b3f7df233cb603214a953399 batctl
+git commit -a -m "batctl: revert to 2015.2.0"
 cd ../..
 
 
