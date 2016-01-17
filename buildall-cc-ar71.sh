@@ -25,6 +25,25 @@ echo "src-git solarfestival git://github.com/freifunk-leipzig/solarfestival-pack
 
 # create index and install all packages
 scripts/feeds update -a
+
+
+revert to batman-adv 2015.2.0
+cd feeds/routing
+git remote add github-routing git://github.com/openwrt-routing/packages.git
+git fetch github-routing
+git checkout -b batman-adv-backport
+rm -r batman-adv
+git checkout 0db26614ecdc60dfed4403374bc9e95586dd3d17 batman-adv
+git commit -a -m "batman-adv: revert to 2015.2.0"
+rm -r alfred
+git checkout e25839ae48cfdb44015be5f47d409182cea8c7d2 alfred
+git commit -a -m "alread: revert to 2015.2.0"
+rm -r batctl
+git checkout f8380b4136b2b030b3f7df233cb603214a953399 batctl
+git commit -a -m "batctl: revert to 2015.2.0"
+cd ../..
+
+
 scripts/feeds update -i
 scripts/feeds install -a
 
