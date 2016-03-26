@@ -36,16 +36,16 @@ while getopts ahj:s:t: opt; do
 done
 
 get_release
-get_revision
+#get_revision
 
 # Set the choosen target
 [ -z "$TARGET" ] && TARGET="ar71xx"
 
 # switch to environment or create a new one
 if [ -n "$SUBTARGET" ]; then
-	ENVIRONMENT="${TARGET}_${SUBTARGET}-r${REV}"
+	ENVIRONMENT="${TARGET}_${SUBTARGET}-r${RELEASE}"
 else
-	ENVIRONMENT="${TARGET}-r${REV}"
+	ENVIRONMENT="${TARGET}-r${RELEASE}"
 fi
 
 if [ -n "$(./scripts/env list |grep $ENVIRONMENT)" ]; then

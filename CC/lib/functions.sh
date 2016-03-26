@@ -41,25 +41,20 @@ apply_patches() {
 
 
 get_release() {
-	SVNURL="$(svn info |grep ^URL | cut -d ' ' -f 2)"
-	if [ -n "$SVNURL" ]; then
-	        if [ -n "`echo $SVNURL |grep trunk`" ]; then
-	                RELEASE="trunk"
-	        else
-	                RELEASE=$(echo $SVNURL | sed 's/svn:\/\/svn.openwrt.org\/openwrt\/branches\///g')
-	        fi
-	fi
-	if [ -z "$SVNURL" ] || [ -z "$RELEASE" ]; then
-	        echo "Unable to find out which release we are using."
-	fi
+    date="$(date +%Y%m%d-%k%m)"
+    tag="$(git describe --tags)";
+    tag_ret=$?
+    if [ "$tag_ret" = 0 ]; then
+        RELEASE="${tag}-${date}"
+    else
+        hash="$(git rev-parse HEAD)"
+        hash_count="$(git rev-list HEAD --count)"
+        RELEASE="${hash}-${date}"
+    fi
 }
 
 get_target() {
 	TARGET=$(grep "^CONFIG_TARGET_[0-9A-Za-z]*=y" .config |cut -d "=" -f 1 |cut -d "_" -f 3)
-}
-
-get_revision() {
-	REV=$(svn info -r COMMITTED | awk '/^Revision:/ { print $2 }')
 }
 
 get_subtarget() {
@@ -70,9 +65,8 @@ get_subtarget() {
 
 update_openwrt_release() {
 	get_release
-	get_revision
 	# version configuration
-	conf_set CONFIG_VERSION_NUMBER "${RELEASE}-r${REV}"
+	conf_set CONFIG_VERSION_NUMBER "${RELEASE}"
 	conf_set CONFIG_VERSION_DIST "${VERSION_DIST}"
 	conf_set CONFIG_VERSION_NICK "${VERSION_NICK}"
 	conf_set CONFIG_VERSION_REPO "${REPO_BASEURL}/%S/%C/packages/"
