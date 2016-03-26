@@ -1,8 +1,15 @@
-Index: feeds.conf.default
-===================================================================
---- feeds.conf.default	(Revision 46434)
-+++ feeds.conf.default	(Arbeitskopie)
-@@ -13,3 +13,11 @@
+diff --git a/feeds.conf.default b/feeds.conf.default
+index 8e14901..b597ac7 100644
+--- a/feeds.conf.default
++++ b/feeds.conf.default
+@@ -1,5 +1,5 @@
+ src-git packages https://github.com/openwrt/packages.git;for-15.05
+-src-git luci https://github.com/openwrt/luci.git;for-15.05
++src-git luci https://github.com/openwrt/luci.git
+ src-git routing https://github.com/openwrt-routing/packages.git;for-15.05
+ src-git telephony https://github.com/openwrt/telephony.git;for-15.05
+ src-git management https://github.com/openwrt-management/packages.git;for-15.05
+@@ -13,3 +13,11 @@ src-git management https://github.com/openwrt-management/packages.git;for-15.05
  #src-svn xfce svn://svn.openwrt.org/openwrt/feeds/xfce
  #src-svn lxde svn://svn.openwrt.org/openwrt/feeds/lxde
  #src-link custom /usr/src/openwrt/custom-feed
