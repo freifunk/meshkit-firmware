@@ -1,16 +1,7 @@
-diff --git a/utils/collectd/Makefile feeds/packages/utils/collectd/Makefile
-index 61b05a8..a762f4d 100644
+diff --git a/utils/collectd/Makefile b/utils/collectd/Makefile
+index 540c54a..fbff373 100644
 --- a/utils/collectd/Makefile
 +++ feeds/packages/utils/collectd/Makefile
-@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
- 
- PKG_NAME:=collectd
- PKG_VERSION:=5.4.2
--PKG_RELEASE:=1
-+PKG_RELEASE:=2
- 
- PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
- PKG_SOURCE_URL:=http://collectd.org/files/
 @@ -123,6 +123,7 @@ COLLECTD_PLUGINS_SELECTED:= \
  	rrdtool \
  	sensors \
@@ -19,7 +10,7 @@ index 61b05a8..a762f4d 100644
  	syslog \
  	table \
  	tail \
-@@ -315,6 +316,7 @@ $(eval $(call BuildPlugin,protocols,network protocols input,protocols,))
+@@ -317,6 +318,7 @@ $(eval $(call BuildPlugin,protocols,network protocols input,protocols,))
  $(eval $(call BuildPlugin,rrdtool,RRDtool output,rrdtool,+PACKAGE_collectd-mod-rrdtool:librrd1))
  $(eval $(call BuildPlugin,sensors,lm_sensors input,sensors,+PACKAGE_collectd-mod-sensors:libsensors))
  $(eval $(call BuildPlugin,snmp,SNMP input,snmp,+PACKAGE_collectd-mod-snmp:libnetsnmp))
@@ -27,8 +18,7 @@ index 61b05a8..a762f4d 100644
  $(eval $(call BuildPlugin,syslog,syslog output,syslog,))
  $(eval $(call BuildPlugin,tail,tail input,tail,))
  $(eval $(call BuildPlugin,table,table-like structured file input,table,))
-
-diff --git a/utils/collectd/patches/940-add-splash-leases-plugin-uci.patch feeds/packages/utils/collectd/patches/940-add-splash-leases-plugin-uci.patch
+diff --git a/utils/collectd/patches/940-add-splash-leases-plugin-uci.patch b/utils/collectd/patches/940-add-splash-leases-plugin-uci.patch
 new file mode 100644
 index 0000000..deb4a86
 --- /dev/null
