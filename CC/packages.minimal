@@ -1,4 +1,5 @@
 auto-ipv6-ib
+ffa-setup-stats
 collectd-mod-conntrack
 collectd-mod-cpu
 collectd-mod-memory
@@ -47,3 +48,4 @@ openvpn-polarssl
 strace
 tcpdump
 uhttpd
+rssileds
