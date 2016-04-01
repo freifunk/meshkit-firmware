@@ -16,7 +16,9 @@ to be used at http://testing.meshkit.freifunk.net
 For configuration see config.sh and the comments there:
 
 $ sh ~/buildscripts/CC/prepare.sh -s svn://svn.openwrt.org/openwrt/branches/chaos_calmer -d chaos_calmer
+
 $ cd chaos_calmer
+
 $ sh ~/buildscripts/CC/build.sh -t ar71xx
 
 Leipzig
@@ -26,7 +28,9 @@ beware, you need at least 40GB HDD Space on building maschine!
 used at http://firmware.leipzig.freifunk.net
 
 $ buildall-x86-kvm.sh
+
 $ make IGNORE_ERRORS=m
+
 $ make IGNORE_ERRORS=m
 
 
