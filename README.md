@@ -1,31 +1,34 @@
-Buildscripts for Meshkit Firmware
+Openwrt Buildscripts for Meshkit
 =================================
 
-These scripts build the Meshkit firmware, which is basically the openwrt
+These scripts build the Openwrt firmware for Meshkit usage. Its basically the openwrt
 imagebuilder plus a few necessary patches and some extra feeds.
 
-For configuration see config.sh and the comments there.
+Für den Einsatz vom Meshkit wird der Openwrt Imagebuilder benötigt. Diese Scripte bauen diesen inkl. einiger weniger Patches und zusätzlichen Software-Pakete.
 
-Prepare
--------
+Alternativ kann auch der Imagebuilder aus dem openwrt trunk genommen werden:
+https://downloads.openwrt.org/snapshots/trunk/ar71xx/generic/OpenWrt-ImageBuilder-ar71xx-generic.Linux-x86_64.tar.bz2
 
-To start with a fresh build, prepare the buildroot first (checkout sources etc):
+CC
+-----
+
+to be used at http://testing.meshkit.freifunk.net
+For configuration see config.sh and the comments there:
 
 $ sh ~/buildscripts/CC/prepare.sh -s svn://svn.openwrt.org/openwrt/branches/chaos_calmer -d chaos_calmer
-
-This should checkout openwrt from svn. Yes, svn. We need that to get clean
-version numbers for the builds.
-
-Build imagebuilder
-------------------
-
-Then change to the destination directory, e.g.
-
 $ cd chaos_calmer
-
-After that, start a build:
-
 $ sh ~/buildscripts/CC/build.sh -t ar71xx
+
+Leipzig
+-------
+
+beware, you need at least 40GB HDD Space on building maschine!
+used at http://firmware.leipzig.freifunk.net
+
+$ buildall-x86-kvm.sh
+$ make IGNORE_ERRORS=m
+$ make IGNORE_ERRORS=m
+
 
 
 
