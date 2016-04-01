@@ -1,6 +1,6 @@
 # build imagebuilder with all packages for a given platform
 REMOTE=git://git.openwrt.org/openwrt.git
-TARGET=ar71xx
+TARGET=ramips
 #TARGET=x86
 
 set +e
@@ -29,9 +29,10 @@ cat >.config <<EOF
 CONFIG_MODULES=y
 CONFIG_HAVE_DOT_CONFIG=y
 CONFIG_TARGET_${TARGET}=y
+CONFIG_TARGET_ramips_mt7621=y
 # CONFIG_TARGET_ROOTFS_EXT4FS is not set
 # CONFIG_TARGET_ROOTFS_JFFS2 is not set
-CONFIG_TARGET_ROOTFS_SQUASHFS=y
+# CONFIG_TARGET_ROOTFS_SQUASHFS=y
 # CONFIG_TARGET_ROOTFS_INCLUDE_UIMAGE is not set
 # CONFIG_TARGET_ROOTFS_INCLUDE_ZIMAGE is not set
 CONFIG_ALL=y
@@ -54,7 +55,7 @@ CONFIG_VERSIONOPT=y
 CONFIG_VERSION_DIST="OpenWrt"
 CONFIG_VERSION_NICK=""
 CONFIG_VERSION_NUMBER=""
-CONFIG_VERSION_REPO="http://firmware.leipzig.freifunk.net:8006/firmware/buildroots/ar71xx_generic_20160323/packages"
+CONFIG_VERSION_REPO="http://firmware.leipzig.freifunk.net:8006/firmware/buildroots/ramips7621_20160401/packages"
 CONFIG_PACKAGE_collectd-mod-netlink=n
 CONFIG_PACKAGE_kmod-pcspkr=n
 EOF
