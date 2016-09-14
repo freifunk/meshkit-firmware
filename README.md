@@ -15,7 +15,7 @@ CC
 to be used at http://testing.meshkit.freifunk.net
 For configuration see config.sh and the comments there:
 
-$ sh ~/buildscripts/CC/prepare.sh -s svn://svn.openwrt.org/openwrt/branches/chaos_calmer -d chaos_calmer
+$ sh ~/buildscripts/CC/prepare.sh -s git://git.openwrt.org/15.05/openwrt.git -d chaos_calmer
 
 $ cd chaos_calmer
 
