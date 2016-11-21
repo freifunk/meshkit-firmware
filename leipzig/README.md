@@ -1,15 +1,15 @@
-Openwrt for Freifunk Meshkit
+LEDE and Openwrt for Freifunk Meshkit
 ============================
 
-This is a Openwrt Build Script for Usage with Meshkit Imagebuilder for Freifunk. Its based on openwrt trunk, all packages will be built so opkg can postinstall more packages if anybody wants.
+This is a LEDE (and Openwrt) Build Script for Usage with Meshkit Imagebuilder for Freifunk. Its based on lede (or openwrt) trunk, all packages will be built so opkg can postinstall more packages if anybody wants.
 
 Please be careful using this, its trunk, sometimes with crazy problems. Freifunk Leipzig will sometimes build that, this Meshkit with newest trunk openwrt can be used at
 
 http://firmware.leipzig.freifunk.net:8086/meshkit/
 
-If you need an outdated Firmware, but with Openwrt Attitude Adjustment please have a look at
+If you need a beginner Firmware or some documentation, see
 
-http://meshkit.freifunk.net
+http://firmware.leipzig.freifunk.net
 
 --
 Freifunk Leipzig
