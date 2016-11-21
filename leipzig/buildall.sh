@@ -1,12 +1,13 @@
 # build imagebuilder with all packages for a given platform
-REMOTE=git://git.openwrt.org/openwrt.git
+REMOTE=git://github.com/lede-project/source
+#REMOTE=git://git.openwrt.org/openwrt.git
 TARGET=ar71xx
 #TARGET=x86
 
 set +e
 
-git clone $REMOTE openwrt
-cd openwrt
+git clone $REMOTE lede
+cd lede
 cp feeds.conf.default feeds.conf
 echo "src-git luci2 http://git.openwrt.org/project/luci2/ui.git" >> feeds.conf
 echo "src-git fastd git://git.metameute.de/lff/pkg_fastd" >> feeds.conf
@@ -54,7 +55,7 @@ CONFIG_VERSIONOPT=y
 CONFIG_VERSION_DIST="OpenWrt"
 CONFIG_VERSION_NICK=""
 CONFIG_VERSION_NUMBER=""
-CONFIG_VERSION_REPO="http://firmware.leipzig.freifunk.net:8006/firmware/buildroots/ar71xx_generic_20160323/packages"
+CONFIG_VERSION_REPO="http://gadow.freifunk.net:8004/meshkit/buildroots/ar71xx_generic_20161121/packages"
 CONFIG_PACKAGE_collectd-mod-netlink=n
 CONFIG_PACKAGE_kmod-pcspkr=n
 EOF
