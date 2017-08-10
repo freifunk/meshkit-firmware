@@ -10,11 +10,13 @@ git clone $REMOTE lede
 cd lede
 cp feeds.conf.default feeds.conf
 echo "src-git luci2 http://git.openwrt.org/project/luci2/ui.git" >> feeds.conf
-echo "src-git fastd git://git.metameute.de/lff/pkg_fastd" >> feeds.conf
-echo "src-git mwan3 git://github.com/Adze1502/mwan.git" >> feeds.conf
+echo "src-git lucing git://github.com/jow-/luci-ng.git" >> feeds.conf
+#echo "src-git fastd git://git.metameute.de/lff/pkg_fastd" >> feeds.conf
+#echo "src-git mwan3 git://github.com/Adze1502/mwan.git" >> feeds.conf
 #echo "src-git batmanadv http://git.open-mesh.org/openwrt-feed-batman-adv.git" >> feeds.conf
 echo "src-git wbm git://github.com/battlemesh/battlemesh-packages.git" >> feeds.conf
 echo "src-git libreage git://github.com/libremap/libremap-agent-openwrt.git" >> feeds.conf
+echo "src-git limeui git://github.com/libremesh/lime-ui-ng.git" >> feeds.conf
 echo "src-git kadnode git://github.com/mwarning/KadNode.git" >> feeds.conf
 echo "src-git kadlibsodium git://github.com/mwarning/libsodium-openwrt.git" >> feeds.conf
 echo "src-git fswebcam git://github.com/fsphil/fswebcam.git" >> feeds.conf
@@ -55,7 +57,7 @@ CONFIG_VERSIONOPT=y
 CONFIG_VERSION_DIST="OpenWrt"
 CONFIG_VERSION_NICK=""
 CONFIG_VERSION_NUMBER=""
-CONFIG_VERSION_REPO="http://gadow.freifunk.net:8004/meshkit/buildroots/ar71xx_generic_20161121/packages"
+CONFIG_VERSION_REPO="http://gadow.freifunk.net:8004/meshkit/buildroots/ar71xx_generic_20170810/packages"
 CONFIG_PACKAGE_collectd-mod-netlink=n
 CONFIG_PACKAGE_kmod-pcspkr=n
 EOF
