@@ -1,0 +1,16 @@
+Index: feeds.conf.default
+===================================================================
+--- feeds.conf.default	(Revision 46434)
++++ feeds.conf.default	(Arbeitskopie)
+@@ -13,3 +13,11 @@
+ #src-svn xfce svn://svn.openwrt.org/openwrt/feeds/xfce
+ #src-svn lxde svn://svn.openwrt.org/openwrt/feeds/lxde
+ #src-link custom /usr/src/openwrt/custom-feed
++src-git augsburg https://github.com/freifunk-augsburg/openwrt-packages.git
++src-git luci2 http://git.openwrt.org/project/luci2/ui.git
++src-git fastd git://git.metameute.de/lff/pkg_fastd
++src-git wbm git://github.com/battlemesh/battlemesh-packages.git
++src-git libreage git://github.com/libremap/libremap-agent-openwrt.git
++src-git kadnode git://github.com/mwarning/KadNode.git
++src-git kadlibsodium git://github.com/mwarning/libsodium-openwrt.git
++src-git fswebcam git://github.com/fsphil/fswebcam.git

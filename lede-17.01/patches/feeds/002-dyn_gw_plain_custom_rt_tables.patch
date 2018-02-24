@@ -1,0 +1,273 @@
+diff -ur master/lib/dyn_gw_plain/README_DYN_GW_PLAIN master_patched/lib/dyn_gw_plain/README_DYN_GW_PLAIN
+--- master/lib/dyn_gw_plain/README_DYN_GW_PLAIN	2018-02-14 00:10:33.171329425 +0100
++++ master_patched/lib/dyn_gw_plain/README_DYN_GW_PLAIN	2018-02-14 00:55:06.506537633 +0100
+@@ -1,6 +1,6 @@
+ DYNAMIC INTERNET GATEWAY PLAIN PLUGIN FOR olsr.org olsrd
+ by Andreas Tonnesen(andreto@olsr.org)
+-additions by Sven-Ola Tuecke
++additions by Sven-Ola Tuecke and Manuel Munz
+ 
+ Automatically adds a default gateway HNA when the node has such a route.
+ Automatically removes a default gateway HNA when the node has no such route.
+@@ -14,6 +14,9 @@
+ 
+ LoadPlugin "olsrd_dyn_gw_plain.so.0.4"
+ {
++    # Numerical value (0-255) of the routing table to check.
++    # The default is 254 (which is the main table).
++    PlParam     "RtTable"  "254"
+ }
+ 
+ 
+diff -ur master/lib/dyn_gw_plain/src/olsrd_dyn_gw_plain.c master_patched/lib/dyn_gw_plain/src/olsrd_dyn_gw_plain.c
+--- master/lib/dyn_gw_plain/src/olsrd_dyn_gw_plain.c	2018-02-14 00:10:33.171329425 +0100
++++ master_patched/lib/dyn_gw_plain/src/olsrd_dyn_gw_plain.c	2018-02-14 00:52:27.696551854 +0100
+@@ -50,19 +50,28 @@
+ #include "olsr.h"
+ #include "builddata.h"
+ 
++#include "plugin_util.h"
++#include <sys/socket.h>
+ #include <stdio.h>
+ #include <string.h>
+ #include <stdlib.h>
+ #include <net/route.h>
+ #include <unistd.h>
+ #include <errno.h>
++#include <linux/netlink.h>
++#include <linux/rtnetlink.h>
++#include <arpa/inet.h>
++#include <net/if.h>
+ 
+ #define DEBUGLEV 1
+ 
+ #define PLUGIN_NAME              "OLSRD dyn_gw_plain plugin"
+ #define PLUGIN_INTERFACE_VERSION 5
+ 
++#define BUFFER_SIZE 4096
++
+ static int has_inet_gateway;
++static int rt_table = 254;
+ 
+ static void my_init(void) __attribute__ ((constructor));
+ static void my_fini(void) __attribute__ ((destructor));
+@@ -95,7 +104,20 @@
+   return PLUGIN_INTERFACE_VERSION;
+ }
+ 
++static int
++set_rt_table(const char *value, void *data __attribute__ ((unused)), set_plugin_parameter_addon addon
++                      __attribute__ ((unused)))
++{
++  if (set_plugin_int(value, &rt_table, addon))
++    return 1;
++  if (rt_table < 0 || rt_table > 255)
++    return 1;
++
++  return 0;
++}
++
+ static const struct olsrd_plugin_parameters plugin_parameters[] = {
++  {.name = "RtTable",.set_plugin_parameter = &set_rt_table,.data = NULL},
+ };
+ 
+ void
+@@ -112,6 +134,11 @@
+ int
+ olsrd_plugin_init(void)
+ {
++  if (olsr_cnf->ip_version == AF_INET6) {
++    olsr_printf(DEBUGLEV, "dyn_gw_plain only works with IPv4, not starting it.\n");
++    return 1;
++  }
++
+   gw_net.v4.s_addr = INET_NET;
+   gw_netmask.v4.s_addr = INET_PREFIX;
+ 
+@@ -128,63 +155,115 @@
+   return 1;
+ }
+ 
+-int
+-check_gw(union olsr_ip_addr *net, union olsr_ip_addr *mask)
++int gwcheck(unsigned int tbl)
+ {
+-  char buff[1024], iface[17];
+-  uint32_t gate_addr, dest_addr, netmask;
+-  unsigned int iflags;
+-  int num, metric, refcnt, use;
+-  int retval = 0;
+-
+-  FILE *fp = fopen(PROCENTRY_ROUTE, "r");
+-
+-  if (!fp) {
+-    perror(PROCENTRY_ROUTE);
+-    olsr_printf(DEBUGLEV, "INET (IPv4) not configured in this system.\n");
+-    return -1;
+-  }
+-
+-  rewind(fp);
+-
+-  /*
+-     olsr_printf(DEBUGLEV, "Genmask         Destination     Gateway         "
+-     "Flags Metric Ref    Use Iface\n");
+-   */
+-  while (fgets(buff, 1023, fp)) {
+-    num =
+-      sscanf(buff, "%16s %128X %128X %X %d %d %d %128X \n", iface, &dest_addr, &gate_addr, &iflags, &refcnt, &use, &metric,
+-             &netmask);
+-
+-    if (num < 8) {
+-      continue;
++    int received = 0, rtatblen, len, metric = 0, fd = -1, is_done = 0, is_multipart = 0, retval = 0;
++    char buf[BUFFER_SIZE], gwaddr[INET_ADDRSTRLEN], iface[IF_NAMESIZE];
++    struct
++    {
++        struct nlmsghdr n;
++        struct rtmsg r;
++    } req;
++
++    struct rtattr *rtatb;
++    struct nlmsghdr *nlmsghdr;
++    struct rtmsg *rtmsg;
++
++    fd = socket(AF_NETLINK, SOCK_RAW, NETLINK_ROUTE);
++    if (fd < 0)
++    {
++        olsr_printf(DEBUGLEV, "Could not open the netlink socket");
++        return -1;
+     }
+ 
+-    /*
+-       olsr_printf(DEBUGLEV, "%-15s ", olsr_ip_to_string((union olsr_ip_addr *)&netmask));
+-
+-       olsr_printf(DEBUGLEV, "%-15s ", olsr_ip_to_string((union olsr_ip_addr *)&dest_addr));
+-
+-       olsr_printf(DEBUGLEV, "%-15s %-6d %-2d %7d %s\n",
+-       olsr_ip_to_string((union olsr_ip_addr *)&gate_addr),
+-       metric, refcnt, use, iface);
+-     */
+-
+-    if (                        //(iflags & RTF_GATEWAY) &&
+-         (iflags & RTF_UP) && (metric == 0) && (netmask == mask->v4.s_addr) && (dest_addr == net->v4.s_addr)) {
+-      olsr_printf(DEBUGLEV, "INTERNET GATEWAY VIA %s detected in routing table.\n", iface);
+-      retval = 1;
++    memset(&req, 0, sizeof(req));
++    req.n.nlmsg_len = NLMSG_LENGTH(sizeof(struct rtmsg));
++    req.n.nlmsg_flags = NLM_F_REQUEST | NLM_F_DUMP;
++    req.n.nlmsg_type = RTM_GETROUTE;
++
++    if (send(fd, &req, req.n.nlmsg_len, 0) < 0)
++    {
++        printf("Error sending to socket");
++        return -1;
+     }
+ 
+-  }
++    /* receive */
++    do
++    {
++        received = recv(fd, buf, sizeof(buf), 0);
++        if (received < 0)
++        {
++            olsr_printf(DEBUGLEV, "Error receiving from socket");
++            return -1;
++        }
++
++        nlmsghdr = (struct nlmsghdr *) buf;
++
++        if (nlmsghdr->nlmsg_flags & NLM_F_MULTI)
++            is_multipart = 1;
++        else
++            is_multipart = 0;
++
++        if (nlmsghdr->nlmsg_type & NLMSG_DONE)
++            is_done = 1;
++        else
++            is_done = 0;
++
++        for(nlmsghdr = (struct nlmsghdr *)buf; received > sizeof(*nlmsghdr);)
++
++        {
++            rtmsg = (struct rtmsg *)NLMSG_DATA(nlmsghdr);
++            len = nlmsghdr->nlmsg_len;
++            /* only get default route from the specified table) */
++            if ((rtmsg->rtm_table == tbl) && (rtmsg->rtm_dst_len == 0))
++            {
++                rtatb = (struct rtattr *) RTM_RTA(rtmsg);
++                rtatblen = RTM_PAYLOAD(nlmsghdr);
++
++                for ( ; RTA_OK(rtatb, rtatblen);
++                        rtatb = RTA_NEXT(rtatb, rtatblen))
++                {
++                    switch(rtatb->rta_type)
++                    {
++                    case RTA_OIF:
++                        if_indextoname(*(int *)RTA_DATA(rtatb), iface);
++                        break;
++                    case RTA_GATEWAY:
++                        inet_ntop(AF_INET, RTA_DATA(rtatb),
++                                  gwaddr, sizeof(gwaddr));
++                        break;
++                    case RTA_PRIORITY:
++                        metric = *(int *)RTA_DATA(rtatb);
++                        break;
++                    default:
++                        break;
++                    }
++                }
++
++                if ((*gwaddr) && (*iface) && (!metric))
++                {
++                    retval = 1;
++                    olsr_printf(DEBUGLEV, "INTERNET GATEWAY VIA %s DEV %s detected in table %d.\n", gwaddr, iface, tbl);
++                    break;
++                }
++                if ((*iface) && (!metric)) {
++                    retval = 1;
++                    olsr_printf(DEBUGLEV, "INTERNET GATEWAY VIA %s detected in table %d.\n", iface, tbl);
++                    break;
++                }
++            }
++            received -= NLMSG_ALIGN(len);
++            nlmsghdr = (struct nlmsghdr*)((char*)nlmsghdr + NLMSG_ALIGN(len));
++        }
+ 
+-  fclose(fp);
+-
+-  if (retval == 0) {
+-    olsr_printf(DEBUGLEV, "No Internet GWs detected...\n");
+-  }
++    }
++    while (is_multipart && !is_done);
+ 
+-  return retval;
++    if (retval == 0) {
++      olsr_printf(DEBUGLEV, "No Internet GWs detected...\n");
++    }
++    close(fd);
++    return retval;
+ }
+ 
+ /**
+@@ -194,7 +273,7 @@
+ void
+ olsr_event(void *foo __attribute__ ((unused)))
+ {
+-  int res = check_gw(&gw_net, &gw_netmask);
++  volatile int res = gwcheck(rt_table);
+   if (1 == res && 0 == has_inet_gateway) {
+     olsr_printf(DEBUGLEV, "Adding OLSR local HNA entry for Internet\n");
+     ip_prefix_list_add(&olsr_cnf->hna_entries, &gw_net, olsr_netmask_to_prefix(&gw_netmask));
+diff -ur master/lib/dyn_gw_plain/src/olsrd_dyn_gw_plain.h master_patched/lib/dyn_gw_plain/src/olsrd_dyn_gw_plain.h
+--- master/lib/dyn_gw_plain/src/olsrd_dyn_gw_plain.h	2018-02-14 00:10:33.171329425 +0100
++++ master_patched/lib/dyn_gw_plain/src/olsrd_dyn_gw_plain.h	2018-02-14 00:43:07.670173647 +0100
+@@ -57,7 +57,7 @@
+ union olsr_ip_addr gw_net;
+ union olsr_ip_addr gw_netmask;
+ 
+-int check_gw(union olsr_ip_addr *net, union olsr_ip_addr *mask);
++int gwcheck(unsigned int);
+ 
+ /* Event function to register with the scheduler */
+ void olsr_event(void *foo);
